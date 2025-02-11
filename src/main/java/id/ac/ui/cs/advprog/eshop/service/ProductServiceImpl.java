@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Iterator;
 
 @Service
-public class ProductServicelmpl implements ProductService {
+public class ProductServiceImpl implements ProductService {
 
     @Autowired
     private ProductRepository productRepository;
