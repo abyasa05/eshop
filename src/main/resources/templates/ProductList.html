@@ -16,7 +16,6 @@
         <tr>
             <th scope="col">Product Name</th>
             <th scope="col">Quantity</th>
-            <th scope="col">ID</th>
             <th scope="col"></th>
             <th scope="col"></th>
         </tr>
@@ -25,7 +24,6 @@
         <tr th:each="product: ${products}">
             <td th:text="${product.productName}"></td>
             <td th:text="${product.productQuantity}"></td>
-            <td th:text="${product.productId}"></td>
             <td>
                 <a th:href="@{/product/edit/{id}(id=${product.productId})}" class="btn btn-primary btn-sm mb-3">Edit Product</a>
             </td>
