@@ -1,6 +1,5 @@
 package id.ac.ui.cs.advprog.eshop.controller;
 
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import id.ac.ui.cs.advprog.eshop.model.Product;
 import id.ac.ui.cs.advprog.eshop.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,5 +51,11 @@ public class ProductController {
     public String editProductPost(@ModelAttribute Product product, Model model){
         service.updateProduct(product);
         return "redirect:list";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String deleteProduct(@PathVariable String id, Model model){
+        service.deleteProduct(id);
+        return "redirect:/product/list";
     }
 }
