@@ -10,10 +10,16 @@ import java.util.Iterator;
 @Repository
 public class ProductRepository {
     private List<Product> productData = new ArrayList<>();
+    private int idCount = 1;
 
     public Product create(Product product){
         productData.add(product);
+        product.setProductId(setId(product.getProductName()));
         return product;
+    }
+
+    public String setId(String name){
+        return String.format("%c%d%c", name.charAt(0), idCount++, name.charAt(name.length() - 1));
     }
 
     public Iterator<Product> findAll(){
