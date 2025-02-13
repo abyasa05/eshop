@@ -18,7 +18,7 @@ public class ProductTest {
 
     @Test
     void testGetProductId() {
-        assertEquals("eBS5Be9f-1c39-4d0e-8860-7lafeaf63bd6", this.product.getProductId());
+        assertEquals("eb558e9f-1c39-460e-8860-71af6af63bd6", this.product.getProductId());
     }
 
     @Test
