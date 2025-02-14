@@ -65,4 +65,40 @@ class ProductRepositoryTest {
         assertEquals(product2.getProductId(), savedProduct.getProductId());
         assertFalse(productIterator.hasNext());
     }
+
+    @Test
+    void testUpdateProduct(){
+        Product product1 = new Product();
+        product1.setProductId("eb556e9f-1c40-460e-8980-71af6af63bd6");
+        product1.setProductName("Baterai AA");
+        product1.setProductQuantity(10);
+        productRepository.create(product1);
+
+        Product updatedProduct = new Product();
+        updatedProduct.setProductId("eb556e9f-1c40-460e-8980-71af6af63bd6");
+        updatedProduct.setProductName("Baterai AAA");
+        updatedProduct.setProductQuantity(20);
+        productRepository.updateProduct(updatedProduct);
+
+        Product getUpdatedProduct = productRepository.findProductById("eb556e9f-1c40-460e-8980-71af6af63bd6");
+        assertEquals(getUpdatedProduct, updatedProduct);
+        assertEquals(20, updatedProduct.getProductQuantity());
+        assertNotEquals("Product 1", getUpdatedProduct.getProductName());
+    }
+
+    @Test
+    void testDeleteProduct() {
+        Product product1 = new Product();
+        product1.setProductId("eb556e9f-1c40-460e-8980-71af6af63bd6");
+        product1.setProductName("Produk baru");
+        product1.setProductQuantity(10);
+        productRepository.create(product1);
+
+        Iterator<Product> productIterator = productRepository.findAll();
+        assertTrue(productIterator.hasNext());
+
+        productRepository.deleteProduct("eb556e9f-1c40-460e-8980-71af6af63bd6");
+        assertFalse(productIterator.hasNext());
+        assertNull(productRepository.findProductById("eb556e9f-1c40-460e-8980-71af6af63bd6"));
+    }
 }
