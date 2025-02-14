@@ -1,0 +1,12 @@
+## Reflection 1
+
+- In the "create product" and "edit product" page, the text fields can accept null value which can lead to unexpected errors or supposedly invalid product attributes. The use of a plain text field for the quantity attribute can also lead to errors (if the user inputs a non-numeric value) or invalid quantities (such as negative numbers). Due to this, restrictions need to be added to the field, such as by adding the "required" attribute. For the quantity field, the input type needs to be changed to "number" and the minimum input value needs to be set to prevent negative values from being inputted.
+
+- The product ID generation hasn't been implemented by default even though IDs are used for certain important features, such as editing and deleting certain products. The ID generation method that I've created is also still considered too simple and easy to be decrypted (as it only uses a combination of incremented integer and characters from the product's name). Other methods of ID creation, such as using UUID or timestamp, can be used to generate a more secure and distinctive product ID.
+
+
+## Reflection 2
+
+1. While it depends on the amount and complexity of the feature that the unit test is covering in a class, according to me, a certain feature in the program needs to be verified by 2-4 tests (which includes use and misuse cases) in a class. We also need to ensure that every potential use case and misuse case by the user is tested in the unit-tests to verify the program.
+
+2. Assuming that the same setup procedures are used again in the new functional test class, the variable names can be written differently, even though it's used for the same functionality with the previous "CreateProductFunctionalTest" functional test. This could lead to inconsistency in the code writing. Thus, using consistent naming conventions for variables across the functional tests could be done in order to mitigate this issue. Furthermore, since both of these functional tests use the same setup procedures and instance variables, it would be better to write the new functional test as a method in the "CreateProductFunctionalTest" class, instead of creating a new separate class. This would reduce code redundancy and make the overall test more efficient.
