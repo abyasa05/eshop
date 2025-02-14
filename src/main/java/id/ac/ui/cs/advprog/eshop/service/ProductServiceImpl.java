@@ -15,9 +15,14 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     private ProductRepository productRepository;
 
+    private int idCount = 1;
+
     @Override
     public Product create(Product product){
         productRepository.create(product);
+        product.setProductId(String.format("%c%d%c",
+                product.getProductName().charAt(0), idCount++,
+                product.getProductName().charAt(product.getProductName().length() - 1)));
         return product;
     }
 
