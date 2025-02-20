@@ -3,6 +3,9 @@ name: PMD Code Scanning
 on:
   push:
 
+permissions:
+  security-events: write      # Grant permission to upload SARIF file
+
 jobs:
   pmd-scan:
     name: PMD code analysis
