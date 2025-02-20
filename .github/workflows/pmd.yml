@@ -14,9 +14,10 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '21'
-      - uses: pmd/pmd-github-action@v2
+      - name: Run PMD
+        uses: pmd/pmd-github-action@v2
         with:
-          rulesets: 'ruleset.xml'
+          rulesets: "category/java/errorprone.xml,category/java/bestpractices.xml"
           analyzeModifiedFilesOnly: false
       - name: Upload SARIF file
         uses: github/codeql-action/upload-sarif@v3
