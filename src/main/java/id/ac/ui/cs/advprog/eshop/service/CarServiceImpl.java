@@ -8,17 +8,13 @@ import java.util.Iterator;
 import java.util.List;
 
 @Service
-public class CarServiceImpl implements CarAccess, CarUpdate {
+public class CarServiceImpl {
     @Autowired
-    private CarRepository carRepository;
+    CarRepository carRepository;
+}
 
-    @Override
-    public Car create(Car car) {
-        // TODO Auto-generated method stub
-        carRepository.create(car);
-        return car;
-    }
-
+@Service
+class CarAccessImpl extends CarServiceImpl implements CarAccessService {
     @Override
     public List<Car> findAll() {
         Iterator<Car> carIterator = carRepository.findAll();
@@ -29,7 +25,16 @@ public class CarServiceImpl implements CarAccess, CarUpdate {
 
     @Override
     public Car findById(String carId) {
-        Car car = carRepository.findById(carId);
+        return carRepository.findById(carId);
+    }
+}
+
+@Service
+class CarUpdateImpl extends CarServiceImpl implements CarUpdateService{
+    @Override
+    public Car create(Car car) {
+        // TODO Auto-generated method stub
+        carRepository.create(car);
         return car;
     }
 
