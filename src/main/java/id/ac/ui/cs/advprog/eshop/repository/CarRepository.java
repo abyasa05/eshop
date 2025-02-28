@@ -1,5 +1,7 @@
 package id.ac.ui.cs.advprog.eshop.repository;
 import id.ac.ui.cs.advprog.eshop.model.Car;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -18,6 +20,7 @@ interface IdGeneration {
     public String generateId();
 }
 
+@Component
 class IdGenerator implements IdGeneration {
     @Override
     public String generateId() {
@@ -28,7 +31,9 @@ class IdGenerator implements IdGeneration {
 @Repository
 class CarRepositoryImpl implements CarRepository {
     private final List<Car> carData = new ArrayList<>();
-    private final IdGenerator idGenerator = new IdGenerator();
+
+    @Autowired
+    private IdGeneration idGenerator;
 
     @Override
     public Car create(Car car) {
