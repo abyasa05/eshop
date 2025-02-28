@@ -13,4 +13,4 @@
 
 <br>
 Link deployment aplikasi:
-[https://interesting-leontyne-eshop-abyasa-89124a48.koyeb.app/](https://interesting-leontyne-eshop-abyasa-89124a48.koyeb.app/)
+https://interesting-leontyne-eshop-abyasa-89124a48.koyeb.app/
