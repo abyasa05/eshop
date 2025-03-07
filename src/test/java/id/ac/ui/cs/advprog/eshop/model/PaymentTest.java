@@ -15,7 +15,7 @@ public class PaymentTest {
     }
 
     @Test
-    void TestStatusSuccess() {
+    void testStatusSuccess() {
         payment = new Payment("13652556-012a-4c07-b546-54eb1396d79b");
         payment.setStatus("SUCCESS");
 
@@ -23,7 +23,7 @@ public class PaymentTest {
     }
 
     @Test
-    void TestStatusFailed() {
+    void testStatusFailed() {
         payment = new Payment("13652556-012a-4c07-b546-54eb1396d79b");
 
         assertThrows(IllegalArgumentException.class, () -> {
@@ -32,55 +32,67 @@ public class PaymentTest {
     }
 
     @Test
-    void TestValidVoucher() {
+    void testValidVoucher() {
         paymentData.put("voucherCode", "ESHOP12345678MAP");
         payment = new Payment("13652556-012a-4c07-b546-54eb1396d79b");
         payment.setStatus("SUCCESS");
-        payment.setPaymentMethod("ESHOP", paymentData);
+        payment.setPaymentMethod("VOUCHER", paymentData);
 
         assertEquals("SUCCESS", payment.getStatus());
     }
 
     @Test
-    void TestInvalidVoucher() {
+    void testInvalidVoucher() {
         paymentData.put("voucherCode", "ESHOPMAPP2345");
         payment = new Payment("13652556-012a-4c07-b546-54eb1396d79b");
         payment.setStatus("SUCCESS");
-        payment.setPaymentMethod("ESHOP", paymentData);
+        payment.setPaymentMethod("VOUCHER", paymentData);
 
         assertEquals("REJECTED", payment.getStatus());
     }
 
     @Test
-    void TestValidDeliveryData() {
+    void testValidDeliveryData() {
         paymentData.put("address", "Jl. Panglima Polim, Jakarta Selatan");
         paymentData.put("deliveryFee", "18500");
         payment = new Payment("13652556-012a-4c07-b546-54eb1396d79b");
         payment.setStatus("SUCCESS");
-        payment.setPaymentMethod("ESHOP", paymentData);
+        payment.setPaymentMethod("CASH_ON_DELIVERY", paymentData);
 
         assertEquals("SUCCESS", payment.getStatus());
     }
 
     @Test
-    void TestInvalidAddress() {
+    void testInvalidAddress() {
         paymentData.put("address", null);
         paymentData.put("deliveryFee", "18500");
         payment = new Payment("13652556-012a-4c07-b546-54eb1396d79b");
         payment.setStatus("SUCCESS");
-        payment.setPaymentMethod("ESHOP", paymentData);
+        payment.setPaymentMethod("CASH_ON_DELIVERY", paymentData);
 
         assertEquals("REJECTED", payment.getStatus());
     }
 
     @Test
-    void TestInvalidDeliveryFee() {
+    void testInvalidDeliveryFee() {
         paymentData.put("address", "Jl. Panglima Polim, Jakarta Selatan");
         paymentData.put("deliveryFee", "");
         payment = new Payment("13652556-012a-4c07-b546-54eb1396d79b");
         payment.setStatus("SUCCESS");
-        payment.setPaymentMethod("ESHOP", paymentData);
+        payment.setPaymentMethod("CASH_ON_DELIVERY", paymentData);
 
         assertEquals("REJECTED", payment.getStatus());
+    }
+
+    @Test
+    void testInvalidPaymentMethod() {
+        paymentData.put("address", "Jl. Panglima Polim, Jakarta Selatan");
+        paymentData.put("deliveryFee", "");
+        payment = new Payment("13652556-012a-4c07-b546-54eb1396d79b");
+        payment.setStatus("SUCCESS");
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            payment.setPaymentMethod("INVALID_METHOD", paymentData);
+        });
     }
 }
