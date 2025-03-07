@@ -13,7 +13,20 @@ public class PaymentRepository {
     private List<Payment> allPayments = new ArrayList<>();
     private Map<Payment, Order> paymentOrderMap = new HashMap<>();
 
-    public Payment save(Payment payment, Order order) { return null; }
+    public Payment save(Payment payment, Order order) {
+        allPayments.add(payment);
+        paymentOrderMap.put(payment, order);
 
-    public Payment getPaymentById(String id){ return null ; }
+        return payment;
+    }
+
+    public Payment getPaymentById(String id){
+        for (Payment payment : allPayments) {
+            if (payment.getId().equals(id)) {
+                return payment;
+            }
+        }
+
+        return null;
+    }
 }
