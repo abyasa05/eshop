@@ -21,7 +21,7 @@ public class PaymentServiceTest {
     private PaymentRepository paymentRepository;
 
     @InjectMocks
-    private PaymentService paymentService;
+    private PaymentServiceImpl paymentService;
 
     @Test
     void testAddPayment() {
@@ -41,18 +41,26 @@ public class PaymentServiceTest {
 
     @Test
     void testSetStatusToSuccess() {
+        Order order = new Order("ID-Order2", List.of(new Product()), 1708570000L, "User 2");
         Payment payment = new Payment("ID-Payment2");
+        when(paymentRepository.getPaymentOrderMap()).thenReturn(Map.of(payment, order));
+
         paymentService.setStatus(payment, "SUCCESS");
 
         assertEquals("SUCCESS", payment.getStatus());
+        assertEquals("SUCCESS", order.getStatus());
     }
 
     @Test
     void testSetStatusToRejected() {
+        Order order = new Order("ID-Order3", List.of(new Product()), 1708570000L, "User 3");
         Payment payment = new Payment("ID-Payment3");
+        when(paymentRepository.getPaymentOrderMap()).thenReturn(Map.of(payment, order));
+
         paymentService.setStatus(payment, "REJECTED");
 
         assertEquals("REJECTED", payment.getStatus());
+        assertEquals("FAILED", order.getStatus());
     }
 
     @Test
