@@ -6,8 +6,10 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
 import lombok.Getter;
+import org.springframework.stereotype.Repository;
 
 @Getter
+@Repository
 public class PaymentRepository {
 
     private List<Payment> allPayments = new ArrayList<>();
